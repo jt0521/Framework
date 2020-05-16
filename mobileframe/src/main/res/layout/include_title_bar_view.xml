@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?><!--自定义actionBar-->
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/bar_height"
+    android:background="@color/c_title_bar_bg">
+
+    <TextView
+        android:id="@+id/leftTv_actionABar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_centerVertical="true"
+        android:contentDescription="@string/app_name"
+        android:drawableLeft="@drawable/ic_back"
+        android:drawablePadding="@dimen/px16"
+        android:gravity="center"
+        android:paddingLeft="@dimen/margin_left_view"
+        android:paddingRight="@dimen/px32"
+        android:textColor="@android:color/white"
+        android:textSize="@dimen/font_36px" />
+
+    <TextView
+        android:id="@+id/rightTv_actionABar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:contentDescription="@string/app_name"
+        android:drawablePadding="@dimen/px16"
+        android:gravity="center"
+        android:paddingRight="@dimen/px20"
+        android:textColor="@android:color/white"
+        android:textSize="@dimen/font_36px" />
+
+    <com.mobileframe.widegt.ScrollTextView
+        android:id="@+id/subjectTv_actionBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_marginLeft="@dimen/px100"
+        android:layout_marginRight="@dimen/px100"
+        android:gravity="center"
+        android:marqueeRepeatLimit="marquee_forever"
+        android:singleLine="true"
+        android:textColor="@android:color/white"
+        android:textSize="@dimen/font_title_page"
+        tools:text="标题" />
+
+</RelativeLayout>

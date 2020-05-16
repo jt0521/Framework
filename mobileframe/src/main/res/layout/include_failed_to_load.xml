@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/failed_root_rl"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:orientation="vertical">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:scaleType="center" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="@dimen/px20"
+            android:gravity="center"
+            android:text="加载失败"
+            android:textColor="#ff4201"
+            android:textSize="19dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="@dimen/px32"
+            android:gravity="left"
+            android:lineSpacingExtra="@dimen/px12"
+            android:text="@string/base_load_failed_des"
+            android:textColor="#ff4201"
+            android:textSize="15dp" />
+
+        <TextView
+            android:id="@+id/failed_reflesh"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="@dimen/px16"
+            android:drawablePadding="@dimen/px4"
+            android:gravity="center_vertical"
+            android:text="点击重试"
+            android:textColor="#ff4201"
+            android:textSize="15dp" />
+
+    </LinearLayout>
+</RelativeLayout>

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.mobileframe">
+
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.CALL_PHONE" />
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+    <uses-permission android:name="android.permission.KILL_BACKGROUND_PROCESSES" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES" />
+
+    <application>
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="${applicationId}.fileProvider"
+            android:exported="false"
+            android:grantUriPermissions="true"
+            android:maxAspectRatio="2.4"
+            android:resizeableActivity="true">
+            <!--ImmersionBar start-->
+            <meta-data
+                android:name="android.max_aspect"
+                android:value="2.4" />
+            <!--适配华为（huawei）刘海屏-->
+            <meta-data
+                android:name="android.notch_support"
+                android:value="true" />
+            <!--适配小米（xiaomi）刘海屏-->
+            <meta-data
+                android:name="notch.config"
+                android:value="portrait|landscape" />
+            <!--ImmersionBar end-->
+
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/provider_paths" />
+        </provider>
+        <activity
+            android:name=".activity.NoNetworkActivity"
+            android:launchMode="singleTask"
+            android:theme="@style/style_translucent_dialog" />
+    </application>
+</manifest>

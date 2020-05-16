@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?><!--默认添加actionBarView-->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/baseLayoutLl"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:clipToPadding="false"
+    android:orientation="vertical">
+
+    <!--状态栏占位view-->
+    <include layout="@layout/include_fit_system_view" />
+
+    <ViewStub
+        android:id="@+id/viewStub"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/bar_height"
+        android:layout="@layout/include_title_bar_view" />
+
+    <FrameLayout
+        android:id="@+id/contentFl"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
+</LinearLayout>

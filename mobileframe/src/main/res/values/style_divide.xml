@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- 水平分割线的style -->
+    <style name="divider_horizontal">
+        <item name="android:background">@color/c_divide_hor_gray</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">@dimen/px1</item>
+    </style>
+</resources>

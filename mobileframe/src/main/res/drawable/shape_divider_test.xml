@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?><!--recyclerView 分割线示例-->
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+    <gradient
+        android:centerColor="@color/c_black"
+        android:endColor="@color/colorPrimary"
+        android:startColor="@color/colorPrimaryDark"
+        android:type="linear" />
+    <size android:height="5dp"
+        android:width="5dp"/>
+
+</shape>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?><!--默认添加actionBarView-->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/fragment_baseLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <androidx.appcompat.widget.ViewStubCompat
+        android:id="@+id/viewStub_fitSystemWindowView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout="@layout/include_fit_system_view" />
+
+    <ViewStub
+        android:id="@+id/viewStub_titleBar"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/bar_height"
+        android:layout="@layout/include_title_bar_view" />
+
+</LinearLayout>

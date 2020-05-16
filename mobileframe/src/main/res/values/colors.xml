@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+    <color name="c_white">#FFFFFF</color>
+    <color name="colorWitheT80">#80ffffff</color>
+    <color name="c_black">#000000</color>
+    <color name="colorYellow">#FFFF00</color>
+    <color name="colorTransparent">#00000000</color>
+    <color name="c_gray">#E4E2E2</color>
+
+    <!--    item 背景颜色；在app中可重写 start-->
+    <!--    默认色-->
+    <color name="c_item_base_bg_default">#ffffffff</color>
+    <!--    响应色-->
+    <color name="c_item_base_bg_pressed">#ffefeff4</color>
+    <!--    item 背景颜色；在app中可重写 end-->
+
+
+    <!--    分割线样式 start-->
+    <!--    水平分割线-->
+    <color name="c_divide_hor_gray">#ffefeff4</color>
+
+    <!--    分割线样式 end-->
+
+    <!--    统一文字颜色-->
+    <color name="c_title_page">@color/c_black</color>
+    <color name="c_title_dialog">@color/c_black</color>
+    <color name="c_text_dialog_content">@color/c_black</color>
+
+
+    <color name="c_title_bar_bg">@color/c_white</color>
+
+
+</resources>

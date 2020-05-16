@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#00000000"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginLeft="@dimen/px160"
+        android:layout_marginRight="@dimen/px160"
+        android:background="@drawable/bg_no_network"
+        android:orientation="vertical">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginLeft="@dimen/px150"
+            android:layout_marginTop="@dimen/px50"
+            android:layout_marginRight="@dimen/px150"
+            android:layout_marginBottom="@dimen/px32"
+            android:src="@drawable/ic_no_network" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:text="无法访问网络"
+            android:textColor="#333333"
+            android:textSize="@dimen/font_32px" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="@dimen/px20"
+            android:layout_marginBottom="@dimen/px42"
+            android:gravity="center_horizontal"
+            android:text="网络出问题了~\n请您查看网络设置"
+            android:textColor="#999999"
+            android:textSize="@dimen/font_24px" />
+
+        <TextView
+            android:id="@+id/ok_confirm"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="@dimen/px20"
+            android:layout_marginBottom="@dimen/px60"
+            android:background="@drawable/bg_btn_know"
+            android:gravity="center"
+            android:paddingLeft="@dimen/px64"
+            android:paddingTop="@dimen/px20"
+            android:paddingRight="@dimen/px64"
+            android:paddingBottom="@dimen/px20"
+            android:text="知道了"
+            android:textColor="#333333"
+            android:textSize="@dimen/font_24px" />
+    </LinearLayout>
+
+
+</FrameLayout>

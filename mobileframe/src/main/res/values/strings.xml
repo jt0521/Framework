@@ -1,0 +1,51 @@
+<resources>
+    <string name="app_name">MobileFrame</string>
+    <string name="openMenu">打开菜单</string>
+    <string name="closeMenu">关闭菜单</string>
+    <string name="str_loading">请稍后...</string>
+    <string name="str_press_again">再按一次退出应用</string>
+    <string name="str_please_fill_contents">请填写内容</string>
+    <string name="login_auth_failure">登录失效,请重新登录</string>
+    <string name="failure_request">请求失败</string>
+    <string name="permission_name_calendar">日历</string>
+    <string name="permission_name_camera">相机</string>
+    <string name="permission_name_contacts">通讯录</string>
+    <string name="permission_name_location">位置信息</string>
+    <string name="permission_name_microphone">麦克风</string>
+    <string name="permission_name_phone">电话</string>
+    <string name="permission_name_sensors">身体传感器</string>
+    <string name="permission_name_sms">短信</string>
+    <string name="permission_name_storage">存储空间</string>
+
+
+    <string name="sorry">抱歉</string>
+    <string name="not_data">暂无数据</string>
+    <string name="failure_net_toast">网络不给力，请检查后重试</string>
+    <string name="get_data_error">数据加载失败了,请检查一下网络，再重新加载</string>
+
+    <string name="base_load_failed_title">页面请求失败，请稍后再试</string>
+    <string name="base_load_failed_des">失败原因可能是:\n1.本页面内容已不存在\n2.本页面加载失败\n3.您的网络异常，请检查网络</string>
+    <string name="click_to_retry">点击重试</string>
+
+    <!--    下拉刷新组件状态提示语-->
+    <string name="pull_to_refresh_pull_label">下滑刷新数据</string>
+    <string name="pull_to_refresh_release_label">释放立即刷新</string>
+    <string name="pull_to_refresh_refreshing_label">更新中……</string>
+    <string name="pull_to_refresh_refreshing_label_end">正在努力加载</string>
+
+    <!--权限-->
+    <string name="permission_cancel">取消</string>
+    <string name="permission_message_permission_failed">我们需要的一些权限被您拒绝或者系统发生错误申请失败，请您到设置页面手动授权，否则功能无法正常使用！</string>
+    <string name="permission_message_permission_rationale">您已经拒绝过我们申请授权，请您同意授权，否则功能无法正常使用！</string>
+    <string name="permission_resume">继续</string>
+    <string name="permission_setting">去设置</string>
+    <string name="permission_title_permission_failed">权限申请失败</string>
+    <string name="permission_title_permission_rationale">权限已被拒绝</string>
+    <string name="authorization_failed">权限授权失败,是否打开设置界面?</string>
+    <string name="permissions">权限</string>
+    <string name="system_alert_window">悬浮窗</string>
+    <string name="setting">设置</string>
+    <string name="location_info">位置信息</string>
+    <string name="is_setting_location_info">%1$s位置权限被拒绝,请前往设置页面开启</string>
+    <string name="is_gps_location_info">为更好的为您提供服务，建议您打开手机GPS定位服务!</string>
+</resources>
