@@ -86,3 +86,17 @@
 
 -keep class com.gyf.immersionbar.* {*;}
 -dontwarn com.gyf.immersionbar.**
+
+ #------沉浸式状态栏------
+ -keep class com.gyf.barlibrary.* {*;}
+
+  #butterknife
+  -keep class butterknife.** { *; }
+  -dontwarn butterknife.internal.**
+  -keep class **$$ViewBinder { *; }
+  -keepclasseswithmembernames class * {
+      @butterknife.* <fields>;
+  }
+  -keepclasseswithmembernames class * {
+      @butterknife.* <methods>;
+  }
