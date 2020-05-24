@@ -1,6 +1,7 @@
 package com.net.netretrofit.callback;
 
 import android.app.Activity;
+import android.app.Application;
 import android.content.Context;
 
 import androidx.fragment.app.Fragment;
@@ -9,9 +10,12 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.text.TextUtils;
 import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.net.netretrofit.R;
 import com.net.netretrofit.RequestManager;
 import com.net.netretrofit.HttpConfigure;
 import com.net.netretrofit.listener.RequestListener;
@@ -228,9 +232,7 @@ public class RetrofitHttpResponseUi implements BaseHttpResponseUi {
                 return;
             }
             Context appCxt = ((Context) mComeFrom);
-            Toast toast = Toast.makeText(appCxt, msg, Toast.LENGTH_SHORT);
-            toast.setGravity(Gravity.CENTER, 0, 0);
-            toast.show();
+            showToast(appCxt, msg);
         } catch (Exception e) {
 
         }
@@ -254,5 +256,17 @@ public class RetrofitHttpResponseUi implements BaseHttpResponseUi {
             return false;
         }
         return true;
+    }
+
+    private void showToast(Context context, String msg) {
+        if (!(context instanceof Application)) {
+            context = context.getApplicationContext();
+        }
+        Toast toast = Toast.makeText(context, msg, Toast.LENGTH_SHORT);
+        View view = LayoutInflater.from(context).inflate(R.layout.layout_toast, null);
+        ((TextView) view.findViewById(R.id.toast_tv)).setText(msg);
+        toast.setView(view);
+        toast.setGravity(Gravity.CENTER, 0, 0);
+        toast.show();
     }
 }
