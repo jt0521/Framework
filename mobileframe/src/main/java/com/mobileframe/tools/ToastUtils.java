@@ -1,10 +1,16 @@
 package com.mobileframe.tools;
 
+import android.app.Application;
 import android.content.Context;
 import android.view.Gravity;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.StringRes;
+
+import com.mobileframe.R;
 
 
 /**
@@ -15,14 +21,14 @@ public class ToastUtils {
         if (contextInvalid(context)) {
             return;
         }
-        Toast.makeText(context, msg, Toast.LENGTH_SHORT).show();
+        showToast(context, msg, Toast.LENGTH_SHORT, Gravity.CENTER_HORIZONTAL | Gravity.BOTTOM);
     }
 
     public static void showToast(Context context, @StringRes int strId) {
         if (contextInvalid(context)) {
             return;
         }
-        Toast.makeText(context, context.getResources().getString(strId), Toast.LENGTH_SHORT).show();
+        showToast(context, context.getResources().getString(strId));
     }
 
     public static void showToastCenter(Context context, @StringRes int strId) {
@@ -30,19 +36,25 @@ public class ToastUtils {
     }
 
     public static void showToastCenter(Context context, String msg) {
-        showToastCenter(context, msg, Toast.LENGTH_SHORT);
+        showToast(context, msg, Toast.LENGTH_SHORT, Gravity.CENTER);
     }
 
     public static void showToastCenterLong(Context context, String msg) {
-        showToastCenter(context, msg, Toast.LENGTH_LONG);
+        showToast(context, msg, Toast.LENGTH_LONG, Gravity.CENTER);
     }
 
-    public static void showToastCenter(Context context, String msg, int duration) {
+    public static void showToast(Context context, String msg, int duration, int gravity) {
         if (contextInvalid(context)) {
             return;
         }
+        if (!(context instanceof Application)) {
+            context = context.getApplicationContext();
+        }
         Toast toast = Toast.makeText(context, msg, duration);
-        toast.setGravity(Gravity.CENTER, 0, 0);
+        View view = LayoutInflater.from(context).inflate(R.layout.layout_toast, null);
+        ((TextView) view.findViewById(R.id.toast_tv)).setText(msg);
+        toast.setView(view);
+        toast.setGravity(gravity, 0, 0);
         toast.show();
     }
 
