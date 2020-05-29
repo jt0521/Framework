@@ -565,6 +565,9 @@ public abstract class DataSwipeAdapter<B, H> extends BaseAdapter implements
                             afterData(beans);
                             addListData(beans);
                             onSuccess(result);
+                            if (mFailedView != null && mFailedView.getTag() != null) {
+                                mListView.removeEmptyView(mFailedView);
+                            }
                         } else {
                             ToastUtils.showToast(mContext, result.msg);
                             mCurrentPage--;
@@ -806,6 +809,7 @@ public abstract class DataSwipeAdapter<B, H> extends BaseAdapter implements
                 }
             });
         }
+        mFailedView.setTag("");
         mListView.setEmptyView(mFailedView);
     }
 
