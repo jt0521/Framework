@@ -556,6 +556,10 @@ public abstract class DataSwipeAdapter<B, H> extends BaseAdapter implements
                     if (response != null && response.code() == 200) {
                         ResultBean<PageBean<List<B>>> result = response.body();
                         if (result != null && result.code == ErrorCode.SUCCESS) {
+                            if (mFailedView != null && mFailedView.getTag() != null) {
+                                mListView.removeEmptyView(mFailedView);
+                                mFailedView.setTag(null);
+                            }
                             List<B> beans = result.body == null ? null : result.body.rows;
 
                             if (STATE_UP_REFRESH == mCurrentState) {
@@ -565,10 +569,6 @@ public abstract class DataSwipeAdapter<B, H> extends BaseAdapter implements
                             afterData(beans);
                             addListData(beans);
                             onSuccess(result);
-                            if (mFailedView != null && mFailedView.getTag() != null) {
-                                mListView.removeEmptyView(mFailedView);
-                                mFailedView.setTag(null);
-                            }
                         } else {
                             ToastUtils.showToast(mContext, result.msg);
                             mCurrentPage--;
