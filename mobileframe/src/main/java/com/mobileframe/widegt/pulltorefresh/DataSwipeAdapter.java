@@ -567,6 +567,7 @@ public abstract class DataSwipeAdapter<B, H> extends BaseAdapter implements
                             onSuccess(result);
                             if (mFailedView != null && mFailedView.getTag() != null) {
                                 mListView.removeEmptyView(mFailedView);
+                                mFailedView.setTag(null);
                             }
                         } else {
                             ToastUtils.showToast(mContext, result.msg);
