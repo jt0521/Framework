@@ -142,4 +142,15 @@
         <attr name="frame_count" format="integer" />
         <attr name="frame_interval" format="integer" />
     </declare-styleable>
+
+    <declare-styleable name="WheelPicker">
+        <attr name="wheel_item_index" format="integer" />
+        <attr name="wheel_item_same_size" format="boolean" />
+        <attr name="wheel_visible_item_count" format="integer" />
+        <attr name="wheel_item_space" format="dimension" />
+        <attr name="wheel_text_size" format="dimension" />
+        <attr name="wheel_text_color" format="color" />
+        <attr name="wheel_line_color" format="color" />
+        <attr name="wheel_line_width" format="dimension" />
+    </declare-styleable>
 </resources>

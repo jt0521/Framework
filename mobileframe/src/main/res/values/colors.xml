@@ -32,5 +32,11 @@
 
     <color name="c_title_bar_bg">@color/c_white</color>
 
+    <color name="c_dialog_cancel_text">#333333</color>
+    <color name="c_dialog_title_text">#333333</color>
+    <color name="c_dialog_commit_text">#00CC68</color>
+    <color name="c_dialog_content_text">#333333</color>
+    <color name="c_dialog_line">#f2f3f6</color>
+
 
 </resources>

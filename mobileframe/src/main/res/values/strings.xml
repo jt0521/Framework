@@ -48,4 +48,17 @@
     <string name="location_info">位置信息</string>
     <string name="is_setting_location_info">%1$s位置权限被拒绝,请前往设置页面开启</string>
     <string name="is_gps_location_info">为更好的为您提供服务，建议您打开手机GPS定位服务!</string>
+    <string name="_year">年</string>
+    <string name="_month">月</string>
+    <string name="_week">周</string>
+    <string name="_day">日</string>
+    <string name="_hour">点</string>
+    <string name="_minute">分</string>
+    <string name="_second">秒</string>
+    <string name="_today">今天</string>
+    <string name="_tomorrow">明天</string>
+    <string name="_after_tomorrow">后天</string>
+    <string name="_this_year">今年</string>
+    <string name="_next_year">明年</string>
+    <string name="determine">确定</string>
 </resources>

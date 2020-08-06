@@ -10,18 +10,6 @@ import android.widget.ImageView;
 
 import com.mobileframe.tools.DensityUtil;
 
-/*
- * Copyright (C) 2017 重庆呼我出行网络科技有限公司
- * 版权所有
- *
- * 功能描述：圆角ImageView
- * 作者：tgl
- * 创建时间：2017/12/20
- *
- * 修改人：
- * 修改描述：
- * 修改日期
- */
 public class RoundImageView extends ImageView {
 
     private final int DEFAULT_RADIUS = 4;
