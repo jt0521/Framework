@@ -1,5 +1,7 @@
 package com.mobileframe.widegt.datapicker;
 
+import com.mobileframe.data.db.Entry;
+
 import java.io.Serializable;
 import java.util.List;
 
@@ -11,7 +13,7 @@ import java.util.List;
  * Description: 地区数据
  * History:
  */
-public abstract class AreaData implements Serializable {
+public abstract class AreaData extends Entry {
 
     public abstract String getName();
 
