@@ -59,6 +59,6 @@ public abstract class TextBaseAdapter implements WheelPickerAdapter {
      * data set.
      * @return The text at the specified position.
      */
-	abstract String getItemText(int position);
+	public abstract String getItemText(int position);
 
 }

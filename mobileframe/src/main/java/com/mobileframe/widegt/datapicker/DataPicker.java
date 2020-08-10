@@ -611,7 +611,7 @@ public class DataPicker {
         public void onDataPicked(Object data);
     }
 
-    private static void showBootSheet(Context context, BottomSheet bottomSheet) {
+    public static void showBootSheet(Context context, BottomSheet bottomSheet) {
         boolean showBottom = true;
         if (context instanceof Activity) {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
