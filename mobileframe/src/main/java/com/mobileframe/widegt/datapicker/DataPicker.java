@@ -6,8 +6,13 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
 import android.view.View;
+import android.widget.LinearLayout;
 
 import com.mobileframe.R;
+import com.mobileframe.widegt.datapicker.core.AbstractWheelPicker;
+import com.mobileframe.widegt.datapicker.core.OnWheelPickedListener;
+import com.mobileframe.widegt.datapicker.view.AreaPickedListener;
+import com.mobileframe.widegt.datapicker.view.AreaWheelPickerAdapter;
 import com.mobileframe.widegt.datapicker.view.BottomSheet;
 import com.mobileframe.widegt.datapicker.view.MultipleTextWheelPicker;
 import com.mobileframe.widegt.datapicker.view.TextWheelPicker;
@@ -620,5 +625,89 @@ public class DataPicker {
         }
     }
 
+    /**
+     * 选择地区
+     *
+     * @param context
+     * @param pickedListener
+     */
+    public static BottomSheet pickDataArea(Context context, String title, final List<AreaData> datas,
+                                           final AreaPickedListener pickedListener) {
+        if (datas == null || datas.isEmpty()) {
+            return null;
+        }
+
+        BottomSheet bottomSheet = new BottomSheet(context);
+        bottomSheet.setMiddleText(title);
+
+        int defaultSelected = 0;
+        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT);
+        params.weight = 1;
+        final TextWheelPicker picker = new TextWheelPicker(context);
+        picker.setLayoutParams(params);
+        setTextPickerStyle(context, picker);
+        AreaWheelPickerAdapter adapter = new AreaWheelPickerAdapter(datas);
+        picker.setAdapter(adapter);
+        picker.setCurrentItem(defaultSelected);
+        int padding = context.getResources().getDimensionPixelOffset(R.dimen.px20);
+        picker.setPadding(0, padding, 0, padding);
+
+
+        final TextWheelPicker pickerCity = new TextWheelPicker(context);
+        pickerCity.setLayoutParams(params);
+        setTextPickerStyle(context, pickerCity);
+        AreaWheelPickerAdapter adapterCity = new AreaWheelPickerAdapter(datas.get(defaultSelected).child());
+        pickerCity.setAdapter(adapterCity);
+        pickerCity.setPadding(0, padding, 0, padding);
+        pickerCity.setCurrentItem(defaultSelected);
+
+        final TextWheelPicker pickerArea = new TextWheelPicker(context);
+        pickerArea.setLayoutParams(params);
+        setTextPickerStyle(context, pickerArea);
+        AreaData data1 = (AreaData) (datas.get(picker.getCurrentItem()).child()).get(defaultSelected);
+        AreaWheelPickerAdapter adapterArea = new AreaWheelPickerAdapter(data1.child());
+        pickerArea.setAdapter(adapterArea);
+        pickerArea.setPadding(0, padding, 0, padding);
+        pickerArea.setCurrentItem(defaultSelected);
+
+        picker.setOnWheelPickedListener(new OnWheelPickedListener<String>() {
+            @Override
+            public void onWheelSelected(AbstractWheelPicker wheelPicker, int index, String data) {
+
+                ((AreaWheelPickerAdapter) pickerCity.getAdapter()).setData(datas.get(index).child());
+                pickerCity.getAdapter().notifyDataSetChanged();
+            }
+        });
+        pickerCity.setOnWheelPickedListener(new OnWheelPickedListener<String>() {
+            @Override
+            public void onWheelSelected(AbstractWheelPicker wheelPicker, int index, String data) {
+                AreaData cityData = ((AreaWheelPickerAdapter) pickerCity.getAdapter())
+                        .getItem(pickerCity.getCurrentItem());
+                ((AreaWheelPickerAdapter) pickerArea.getAdapter()).setData(cityData.child());
+                pickerArea.getAdapter().notifyDataSetChanged();
+            }
+        });
+
+        LinearLayout linearLayout = new LinearLayout(context);
+        linearLayout.setOrientation(LinearLayout.HORIZONTAL);
+        linearLayout.addView(picker);
+        linearLayout.addView(pickerCity);
+        linearLayout.addView(pickerArea);
+        bottomSheet.setContent(linearLayout);
+        bottomSheet.setRightBtnText(context.getString(R.string.determine));
+        showBootSheet(context, bottomSheet);
+
+        bottomSheet.setRightBtnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (pickedListener != null) {
+                    pickedListener.onPicked(picker.getAdapter().getItem(picker.getCurrentItem()),
+                            pickerCity.getAdapter().getItem(pickerCity.getCurrentItem()),
+                            pickerArea.getAdapter().getItem(pickerArea.getCurrentItem()));
+                }
+            }
+        });
+        return bottomSheet;
+    }
 }
 
