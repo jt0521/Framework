@@ -81,6 +81,10 @@ public abstract class AbstractWheelPicker<T extends WheelPickerAdapter> extends 
 
     //是否可以响应滑动事件
     private boolean mTouchable = true;
+    /**
+     * 是否联动
+     */
+    private boolean mLinkage = false;
 
     public AbstractWheelPicker(Context context) {
         super(context);
@@ -253,6 +257,9 @@ public abstract class AbstractWheelPicker<T extends WheelPickerAdapter> extends 
         mCurrItemIndex = index;
         mPickedItemIndex = index;
         requestComputeLayout();
+        if (mLinkage) {
+            onWheelSelected(mCurrItemIndex);
+        }
     }
 
     public void setCurrentItemWithoutReLayout(int index) {
@@ -405,4 +412,7 @@ public abstract class AbstractWheelPicker<T extends WheelPickerAdapter> extends 
         }
     }
 
+    public void setLinePaint(Paint linePaint) {
+        mLinePaint = linePaint;
+    }
 }
