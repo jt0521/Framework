@@ -412,7 +412,12 @@ public abstract class AbstractWheelPicker<T extends WheelPickerAdapter> extends 
         }
     }
 
-    public void setLinePaint(Paint linePaint) {
-        mLinePaint = linePaint;
+    /**
+     * 设置是否联动
+     *
+     * @param linkage
+     */
+    public void setLinkage(boolean linkage) {
+        mLinkage = linkage;
     }
 }
