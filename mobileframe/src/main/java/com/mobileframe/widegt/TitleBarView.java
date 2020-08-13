@@ -5,6 +5,7 @@ import android.app.Activity;
 import androidx.annotation.ColorRes;
 import androidx.annotation.DrawableRes;
 import androidx.core.content.ContextCompat;
+
 import android.text.Spanned;
 import android.view.View;
 import android.widget.RelativeLayout;
@@ -109,9 +110,9 @@ public class TitleBarView {
     public void setLeftTv(String leftText, @DrawableRes int imgId, View.OnClickListener listener) {
         mLeftTv.setText(leftText);
         if (imgId == -1) {
-            mLeftTv.setCompoundDrawablesWithIntrinsicBounds(imgId, 0, 0, 0);
-        } else {
             mLeftTv.setCompoundDrawablesWithIntrinsicBounds(0, 0, 0, 0);
+        } else {
+            mLeftTv.setCompoundDrawablesWithIntrinsicBounds(imgId, 0, 0, 0);
         }
         mLeftTv.setOnClickListener(listener);
     }
@@ -160,9 +161,9 @@ public class TitleBarView {
     public void setRightTv(String rightText, @DrawableRes int imgId, View.OnClickListener listener) {
         mRightTv.setText(rightText);
         if (imgId == -1) {
-            mRightTv.setCompoundDrawablesWithIntrinsicBounds(0, 0, imgId, 0);
-        } else {
             mRightTv.setCompoundDrawablesWithIntrinsicBounds(0, 0, 0, 0);
+        } else {
+            mRightTv.setCompoundDrawablesWithIntrinsicBounds(0, 0, imgId, 0);
         }
         mRightTv.setOnClickListener(listener);
     }
@@ -213,7 +214,7 @@ public class TitleBarView {
     }
 
     public void setBackgroundColor(int colorId) {
-        mBarViewRl.setBackgroundColor(ContextCompat.getColor(mContext,colorId));
+        mBarViewRl.setBackgroundColor(ContextCompat.getColor(mContext, colorId));
     }
 
 
