@@ -21,7 +21,7 @@ public class ToastUtils {
         if (contextInvalid(context)) {
             return;
         }
-        showToast(context, msg, Toast.LENGTH_SHORT, Gravity.CENTER_HORIZONTAL | Gravity.BOTTOM);
+        showToast(context, msg, Toast.LENGTH_SHORT, Gravity.CENTER);
     }
 
     public static void showToast(Context context, @StringRes int strId) {
