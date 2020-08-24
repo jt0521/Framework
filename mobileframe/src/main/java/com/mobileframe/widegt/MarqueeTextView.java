@@ -71,11 +71,12 @@ public class MarqueeTextView extends LinearLayout {
         viewFlipper.setInAnimation(AnimationUtils.loadAnimation(mContext, R.anim.slide_in_bottom_marqee));
         //设置上下的动画效果（自定义动画，所以改左右也很简单）
         viewFlipper.setOutAnimation(AnimationUtils.loadAnimation(mContext, R.anim.slide_out_top_marqee));
-        viewFlipper.startFlipping();
     }
 
     public void initMarqueeTextView(String[] textArrays, MarqueeTvClickListener marqueeTextViewClickListener) {
-        if (textArrays.length == 0) {
+        if (textArrays == null || textArrays.length == 0) {
+            viewFlipper.stopFlipping();
+            viewFlipper.removeAllViews();
             return;
         }
 
@@ -96,6 +97,7 @@ public class MarqueeTextView extends LinearLayout {
             viewFlipper.addView(textView, lp);
             i++;
         }
+        viewFlipper.startFlipping();
     }
 
     public void releaseResources() {
@@ -106,6 +108,21 @@ public class MarqueeTextView extends LinearLayout {
                 viewFlipper = null;
             }
             marqueeTextView = null;
+        }
+    }
+
+    private void onResume() {
+        if (marqueeTextView != null
+                && viewFlipper != null
+                && !viewFlipper.isFlipping()
+                && viewFlipper.getChildCount() > 0) {
+            viewFlipper.startFlipping();
+        }
+    }
+
+    public void onPause() {
+        if (viewFlipper != null && viewFlipper.isFlipping()) {
+            viewFlipper.stopFlipping();
         }
     }
 
