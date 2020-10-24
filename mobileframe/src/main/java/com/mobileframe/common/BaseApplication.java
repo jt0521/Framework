@@ -11,9 +11,8 @@ import androidx.multidex.MultiDex;
 
 import com.mobileframe.activity.BaseActivity;
 import com.mobileframe.fragments.BaseFragment;
-import com.mobileframe.platform.StethoUtils;
 import com.mobileframe.tools.AppUtils;
-import com.mobileframe.tools.CrashExceptionHandler;
+import com.mobileframe.tools.PkgUtil;
 import com.net.netretrofit.HttpConfigure;
 import com.net.netretrofit.listener.UiHandler;
 import com.squareup.leakcanary.LeakCanary;
@@ -46,8 +45,14 @@ public abstract class BaseApplication extends Application implements UiHandler {
             //StethoUtils.configureInterceptor(new OkHttpClient.Builder().build());
             //CrashExceptionHandler.getInstance().init(this);
         }
-        initHttp();
+        //initHttp();
+        init();
     }
+
+    /**
+     * application onCreate中调用，避免多进程多次初始化
+     */
+    public abstract void init();
 
     /**
      * 注册LeakCanary
@@ -82,9 +87,9 @@ public abstract class BaseApplication extends Application implements UiHandler {
     /**
      * 默认初始化网络
      */
-    private void initHttp() {
+    public void initHttp() {
         HttpConfigure.setServiceHost(getHttpHost());
-        HttpConfigure.init(this, "1.0", "custom", "app");
+        HttpConfigure.init(this, PkgUtil.getAppVersionName(this), "custom", "app");
         HttpConfigure.setUiHandler(this);
     }
 
