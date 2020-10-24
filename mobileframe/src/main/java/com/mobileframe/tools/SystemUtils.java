@@ -52,6 +52,7 @@ public class SystemUtils {
                 if (!haveInstallPermission) {
                     Uri packageURI = Uri.parse("package:" + context.getPackageName());
                     Intent intent = new Intent(Settings.ACTION_MANAGE_UNKNOWN_APP_SOURCES, packageURI);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                     context.startActivity(intent);
                 } else {
                     Uri apkUri = FileProvider.getUriForFile(context, context.getPackageName() + ".fileProvider", file);
