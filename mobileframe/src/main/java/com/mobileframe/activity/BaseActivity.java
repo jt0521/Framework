@@ -91,7 +91,11 @@ public abstract class BaseActivity extends AppCompatActivity {
      * 设置屏幕固定方向，默认竖屏
      */
     protected void setScreenOrientation() {
-        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+        try {
+            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+        } catch (Exception e) {
+
+        }
     }
 
     /**
