@@ -23,7 +23,7 @@ import android.widget.TextView;
 import com.mobileframe.R;
 import com.mobileframe.common.ActivityStackManager;
 import com.mobileframe.tools.DensityUtil;
-import com.mobileframe.tools.ToastUtils;
+import com.toast.ToastUtils;
 
 import java.util.ArrayList;
 import java.util.LinkedList;

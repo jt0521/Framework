@@ -15,6 +15,8 @@ import android.provider.Settings;
 import android.webkit.MimeTypeMap;
 import android.widget.Toast;
 
+import com.toast.ToastUtils;
+
 import java.io.File;
 
 /**
@@ -97,7 +99,7 @@ public class SystemUtils {
         Uri data = Uri.parse("tel:" + phoneNum);
         intent.setData(data);
         if (ContextCompat.checkSelfPermission(context, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
-            Toast.makeText(context, "请开启拨号权限", Toast.LENGTH_SHORT).show();
+            ToastUtils.showToast(context,"请开启拨号权限");
             return;
         }
         context.startActivity(intent);
@@ -108,7 +110,7 @@ public class SystemUtils {
         Uri data = Uri.parse("tel:" + phoneNum);
         intent.setData(data);
         if (ContextCompat.checkSelfPermission(context, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
-            Toast.makeText(context, "请开启拨号权限", Toast.LENGTH_SHORT).show();
+            ToastUtils.showToast(context,"请开启拨号权限");
             return;
         }
         context.startActivity(intent);

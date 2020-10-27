@@ -8,6 +8,7 @@ import android.util.Log;
 import android.widget.Toast;
 
 import com.mobileframe.common.ActivityStackManager;
+import com.toast.ToastUtils;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -85,7 +86,7 @@ public class CrashExceptionHandler implements UncaughtExceptionHandler {
             @Override
             public void run() {
                 Looper.prepare();
-                Toast.makeText(mContext, "程序异常退出", Toast.LENGTH_SHORT).show();
+                ToastUtils.showToast(mContext,"程序异常退出");
                 saveLog2File(ex);
                 Looper.loop();
             }

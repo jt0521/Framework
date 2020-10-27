@@ -75,6 +75,7 @@ public class ToastUtils {
     }
 
     public static void showToast(Toast toast) {
+        //这里只针对7.0；7.0以后google已经修复
         if (Build.VERSION.SDK_INT > Build.VERSION_CODES.M && Build.VERSION.SDK_INT < Build.VERSION_CODES.O) {
             hookToast(toast);
         }

@@ -17,6 +17,7 @@ import androidx.core.app.NotificationCompat;
 import android.widget.Toast;
 
 import com.mobileframe.tools.SystemUtils;
+import com.toast.ToastUtils;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -76,7 +77,7 @@ public class UpdateVersionService extends Service {
 
     private void downloadApk(String downURL) {
         if (isDownloading) {
-            Toast.makeText(getApplicationContext(), "正在下载...", Toast.LENGTH_SHORT).show();
+            ToastUtils.showToast(getApplicationContext(),"正在下载...");
             return;
         }
         int lastIndex = downURL.lastIndexOf("/");
@@ -256,18 +257,15 @@ public class UpdateVersionService extends Service {
             if (msg.what == 1) {
                 stopSelf();
                 mProgressCount = -1;
-                Toast.makeText(getApplicationContext(), "下载成功",
-                        Toast.LENGTH_SHORT).show();
+                ToastUtils.showToast(getApplicationContext(),"下载成功");
                 SystemUtils.installApk(getApplicationContext(), new File(msg.obj.toString()));
             } else if (msg.what == 2) {
                 isDownloading = true;
             } else if (msg.what == 3) {
-                Toast.makeText(getApplicationContext(), "已取消下载",
-                        Toast.LENGTH_SHORT).show();
+                ToastUtils.showToast(getApplicationContext(),"已取消下载");
             } else {
                 mProgressCount = -1;
-                Toast.makeText(getApplicationContext(), "下载失败",
-                        Toast.LENGTH_SHORT).show();
+                ToastUtils.showToast(getApplicationContext(),"下载失败");
             }
         }
     };

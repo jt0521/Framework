@@ -20,8 +20,8 @@ import com.mobileframe.R;
 import com.mobileframe.activity.BaseActivity;
 import com.mobileframe.common.BaseApplication;
 import com.mobileframe.tools.DensityUtil;
-import com.mobileframe.tools.ToastUtils;
 import com.mobileframe.widegt.TitleBarView;
+import com.toast.ToastUtils;
 
 import org.greenrobot.eventbus.EventBus;
 

@@ -20,6 +20,7 @@ import com.net.netretrofit.RequestManager;
 import com.net.netretrofit.HttpConfigure;
 import com.net.netretrofit.listener.RequestListener;
 import com.net.netretrofit.listener.UiHandler;
+import com.toast.ToastUtils;
 
 import retrofit2.Call;
 
@@ -232,7 +233,7 @@ public class RetrofitHttpResponseUi implements BaseHttpResponseUi {
                 return;
             }
             Context appCxt = ((Context) mComeFrom);
-            showToast(appCxt, msg);
+            ToastUtils.showToast(appCxt, msg);
         } catch (Exception e) {
 
         }
@@ -256,17 +257,5 @@ public class RetrofitHttpResponseUi implements BaseHttpResponseUi {
             return false;
         }
         return true;
-    }
-
-    private void showToast(Context context, String msg) {
-        if (!(context instanceof Application)) {
-            context = context.getApplicationContext();
-        }
-        Toast toast = Toast.makeText(context, msg, Toast.LENGTH_SHORT);
-        View view = LayoutInflater.from(context).inflate(R.layout.layout_toast, null);
-        ((TextView) view.findViewById(R.id.toast_tv)).setText(msg);
-        toast.setView(view);
-        toast.setGravity(Gravity.CENTER, 0, 0);
-        toast.show();
     }
 }

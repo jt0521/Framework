@@ -1,7 +1,5 @@
 package com.mobileframe.activity;
 
-import android.app.job.JobScheduler;
-import android.app.job.JobService;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -16,7 +14,6 @@ import androidx.annotation.LayoutRes;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
-import android.os.Handler;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewStub;
@@ -31,9 +28,9 @@ import com.mobileframe.R;
 import com.mobileframe.broadcast.NetBean;
 import com.mobileframe.common.ActivityStackManager;
 import com.mobileframe.common.BaseApplication;
-import com.mobileframe.tools.ToastUtils;
 import com.mobileframe.widegt.LoadingProgressDialog;
 import com.mobileframe.widegt.TitleBarView;
+import com.toast.ToastUtils;
 
 import org.greenrobot.eventbus.EventBus;
 
