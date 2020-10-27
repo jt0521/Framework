@@ -92,6 +92,8 @@ public abstract class BaseActivity extends AppCompatActivity {
      */
     protected void setScreenOrientation() {
         try {
+            // 8.0设置activity透明时，设置固定屏幕方向会抛异常
+            //IllegalStateException:Only fullscreen activities can request orientation
             setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         } catch (Exception e) {
 
