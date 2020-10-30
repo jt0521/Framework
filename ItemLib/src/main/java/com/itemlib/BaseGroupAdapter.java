@@ -19,7 +19,7 @@ import java.util.List;
  * Description: 分组列表，内容格式为List<T<C>>
  * History:
  */
-public abstract class GroupAdapter<T, TVH extends RecyclerView.ViewHolder
+public abstract class BaseGroupAdapter<T, TVH extends RecyclerView.ViewHolder
         , CVH extends RecyclerView.ViewHolder> extends RecyclerView.Adapter {
 
     private Context mContext;
@@ -39,7 +39,7 @@ public abstract class GroupAdapter<T, TVH extends RecyclerView.ViewHolder
         this.onChildClickListener = onChildClickListener;
     }
 
-    public GroupAdapter(Context context) {
+    public BaseGroupAdapter(Context context) {
         mContext = context;
     }
 
@@ -88,7 +88,7 @@ public abstract class GroupAdapter<T, TVH extends RecyclerView.ViewHolder
                     public void onClick(View v) {
                         int position = holder.getAdapterPosition();
                         Position pos = getTeamChildPosition(position);
-                        onGroupClickListener.onTeamItemClick(v, pos.team);
+                        onGroupClickListener.onGroupItemClick(v, pos.team);
                     }
                 });
             }

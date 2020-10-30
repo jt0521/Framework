@@ -16,5 +16,5 @@ public interface OnGroupClickListener {
      * @param itemView      the itemView of the group item.
      * @param groupPosition the position of the group.
      */
-    void onTeamItemClick(View itemView, int groupPosition);
+    void onGroupItemClick(View itemView, int groupPosition);
 }

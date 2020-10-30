@@ -15,14 +15,14 @@ import androidx.recyclerview.widget.RecyclerView;
  * @since 2017-05-02 0.1
  */
 public class ItemDecoration extends RecyclerView.ItemDecoration {
-    private GroupAdapter mAdapter;
+    private BaseGroupAdapter mAdapter;
     private Drawable mGroupDivider;
     private Drawable mChildHeaderDivider;
     private Drawable mChildDivider;
     private boolean mFirstDividerEnabled = true;
     private final Rect mBounds = new Rect();
 
-    public ItemDecoration(GroupAdapter adapter) {
+    public ItemDecoration(BaseGroupAdapter adapter) {
         mAdapter = adapter;
     }
 
