@@ -1,9 +1,11 @@
 package com.itemlib;
 
 import android.content.Context;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.annotation.LayoutRes;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -14,37 +16,65 @@ import java.util.List;
  * FileName: TeamAdapter
  * Author: Administrator
  * Date: 2020/10/29 15:51
- * Description:
+ * Description: 分组列表，内容格式为List<T<C>>
  * History:
  */
-public abstract class TeamAdapter<T, TVH extends RecyclerView.ViewHolder
+public abstract class GroupAdapter<T, TVH extends RecyclerView.ViewHolder
         , CVH extends RecyclerView.ViewHolder> extends RecyclerView.Adapter {
 
     private Context mContext;
-    private List<T> mTeams;
+    private List<T> mGroups;
     private int mCount;
     private final int TYPE_TEAM = 1;
     private final int TYPE_CHILD = 2;
     private final int INVALID_POSITION = -1;
-    private OnTeamClickListener onTeamClickListener;
+    private OnGroupClickListener onGroupClickListener;
     private OnChildClickListener onChildClickListener;
 
-    public void setOnTeamClickListener(OnTeamClickListener onTeamClickListener) {
-        this.onTeamClickListener = onTeamClickListener;
+    public void setOnGroupClickListener(OnGroupClickListener onGroupClickListener) {
+        this.onGroupClickListener = onGroupClickListener;
     }
 
     public void setOnChildClickListener(OnChildClickListener onChildClickListener) {
         this.onChildClickListener = onChildClickListener;
     }
 
-    public TeamAdapter(Context context) {
+    public GroupAdapter(Context context) {
         mContext = context;
     }
 
-    public void setTeams(List<T> mTeams) {
-        this.mTeams = mTeams;
+    public View inflate(@LayoutRes int layoutId) {
+        return LayoutInflater.from(mContext).inflate(layoutId, null);
+    }
+
+    public void setData(List<T> datas) {
+        this.mGroups = datas;
         getCount();
         notifyDataSetChanged();
+    }
+
+    public void add(List<T> datas) {
+        int lastCount = getItemCount();
+        addGroups(datas);
+        getCount();
+        notifyItemRangeInserted(lastCount, mCount - lastCount);
+    }
+
+    public void update(List<T> groups) {
+        mGroups.clear();
+        addGroups(groups);
+        getCount();
+        notifyDataSetChanged();
+    }
+
+    private void addGroups(List<T> groups) {
+        if (groups != null) {
+            mGroups.addAll(groups);
+        }
+    }
+
+    public T getItem(int position) {
+        return mGroups.get(position);
     }
 
     @NonNull
@@ -52,13 +82,13 @@ public abstract class TeamAdapter<T, TVH extends RecyclerView.ViewHolder
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         if (viewType == TYPE_TEAM) {
             TVH holder = onCreateTeamHolder(parent, viewType);
-            if (onTeamClickListener != null) {
+            if (onGroupClickListener != null) {
                 holder.itemView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         int position = holder.getAdapterPosition();
                         Position pos = getTeamChildPosition(position);
-                        onTeamClickListener.onTeamItemClick(v, pos.team);
+                        onGroupClickListener.onTeamItemClick(v, pos.team);
                     }
                 });
             }
@@ -84,20 +114,21 @@ public abstract class TeamAdapter<T, TVH extends RecyclerView.ViewHolder
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
+        Position pos = getTeamChildPosition(position);
         if (getItemViewType(position) == TYPE_TEAM) {
-            onBindViewTeamHolder(holder, position);
+            onBindViewTeamHolder((TVH) holder, pos.team);
         } else {
-            onBindViewChildHolder(holder, position);
+            onBindViewChildHolder((CVH) holder, pos.team, pos.child);
         }
     }
 
-    public abstract void onBindViewTeamHolder(@NonNull RecyclerView.ViewHolder holder, int position);
+    public abstract void onBindViewTeamHolder(@NonNull TVH holder, int teamPosition);
 
-    public abstract void onBindViewChildHolder(@NonNull RecyclerView.ViewHolder holder, int position);
+    public abstract void onBindViewChildHolder(@NonNull CVH holder, int teamPosition, int position);
 
     @Override
     public int getItemViewType(int position) {
-        return getItemType(position) == ItemType.TYPE_TEAM_TITLE ? TYPE_TEAM : TYPE_CHILD;
+        return getItemType(position) == ItemType.TYPE_Group_TITLE ? TYPE_TEAM : TYPE_CHILD;
     }
 
     @Override
@@ -106,11 +137,11 @@ public abstract class TeamAdapter<T, TVH extends RecyclerView.ViewHolder
     }
 
     private int getCount() {
-        if (mTeams == null) {
+        if (mGroups == null) {
             return mCount = 0;
         }
         mCount = 0;
-        for (T t : mTeams) {
+        for (T t : mGroups) {
             if (t == null) {
                 continue;
             }
@@ -132,9 +163,9 @@ public abstract class TeamAdapter<T, TVH extends RecyclerView.ViewHolder
     public ItemType getItemType(int itemPosition) {
         int count = 0;
         int childCount;
-        for (T t : mTeams) {
+        for (T t : mGroups) {
             if (itemPosition == count) {
-                return ItemType.TYPE_TEAM_TITLE;
+                return ItemType.TYPE_Group_TITLE;
             }
             childCount = getChildCount(t);
             count += 1;
@@ -153,7 +184,7 @@ public abstract class TeamAdapter<T, TVH extends RecyclerView.ViewHolder
         int itemCount = 0;
         int childCount;
         final Position position = new Position();
-        for (T g : mTeams) {
+        for (T g : mGroups) {
             if (itemPosition == itemCount) {
                 position.child = INVALID_POSITION;
                 return position;

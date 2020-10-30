@@ -17,25 +17,25 @@ import androidx.recyclerview.widget.RecyclerView;
  * @author 黄浩杭 (msdx.android@qq.com)
  * @since 2017-05-02 0.1
  */
-public class TeamItemDecoration extends RecyclerView.ItemDecoration {
-    private TeamAdapter mAdapter;
-    private Drawable mTeamDivider;
-    private Drawable mTitleDivider;
+public class ItemDecoration extends RecyclerView.ItemDecoration {
+    private GroupAdapter mAdapter;
+    private Drawable mGroupDivider;
+    private Drawable mChildHeaderDivider;
     private Drawable mChildDivider;
     private boolean mFirstDividerEnabled = true;
     private final Rect mBounds = new Rect();
 
-    public TeamItemDecoration(TeamAdapter adapter) {
+    public ItemDecoration(GroupAdapter adapter) {
         mAdapter = adapter;
     }
 
     /**
      * 组与组的分割线
      *
-     * @param teamDivider
+     * @param groupDivider
      */
-    public void setTeamDivider(Drawable teamDivider) {
-        mTeamDivider = teamDivider;
+    public void setGroupDivider(Drawable groupDivider) {
+        mGroupDivider = groupDivider;
     }
 
     /**
@@ -43,8 +43,8 @@ public class TeamItemDecoration extends RecyclerView.ItemDecoration {
      *
      * @param titleDivider
      */
-    public void setTitleDivider(Drawable titleDivider) {
-        mTitleDivider = titleDivider;
+    public void setChildHeaderDivider(Drawable titleDivider) {
+        mChildHeaderDivider = titleDivider;
     }
 
     /**
@@ -80,10 +80,10 @@ public class TeamItemDecoration extends RecyclerView.ItemDecoration {
     private Drawable getDividerDrawable(int position) {
         ItemType type = mAdapter.getItemType(position);
         switch (type) {
-            case TYPE_TEAM_TITLE:
-                return mTeamDivider;
+            case TYPE_Group_TITLE:
+                return mGroupDivider;
             case TYPE_CHILD_FIRST:
-                return mTitleDivider;
+                return mChildHeaderDivider;
             case TYPE_CHILD_NOT_FIRST:
                 return mChildDivider;
             default:

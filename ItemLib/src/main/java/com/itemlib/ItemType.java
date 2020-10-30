@@ -9,7 +9,7 @@ package com.itemlib;
  * History:
  */
 public enum ItemType {
-    TYPE_TEAM_TITLE,
+    TYPE_Group_TITLE,
     TYPE_CHILD_FIRST,
     TYPE_CHILD_NOT_FIRST
 }

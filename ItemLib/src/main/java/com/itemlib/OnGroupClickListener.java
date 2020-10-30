@@ -9,7 +9,7 @@ import android.view.View;
 /**
  * 组点击事件
  */
-public interface OnTeamClickListener {
+public interface OnGroupClickListener {
     /**
      * Callback when the group item was clicked.
      *
