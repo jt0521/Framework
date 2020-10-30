@@ -1,6 +1,3 @@
-/*
- * Copyright (c) 2017. Xi'an iRain IOT Technology service CO., Ltd (ShenZhen). All Rights Reserved.
- */
 package com.itemlib;
 
 import android.graphics.Canvas;
