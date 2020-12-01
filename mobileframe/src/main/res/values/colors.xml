@@ -10,33 +10,4 @@
     <color name="colorTransparent">#00000000</color>
     <color name="c_gray">#E4E2E2</color>
 
-    <!--    item 背景颜色；在app中可重写 start-->
-    <!--    默认色-->
-    <color name="c_item_base_bg_default">#ffffffff</color>
-    <!--    响应色-->
-    <color name="c_item_base_bg_pressed">#ffefeff4</color>
-    <!--    item 背景颜色；在app中可重写 end-->
-
-
-    <!--    分割线样式 start-->
-    <!--    水平分割线-->
-    <color name="c_divide_hor_gray">#ffefeff4</color>
-
-    <!--    分割线样式 end-->
-
-    <!--    统一文字颜色-->
-    <color name="c_title_page">@color/c_black</color>
-    <color name="c_title_dialog">@color/c_black</color>
-    <color name="c_text_dialog_content">@color/c_black</color>
-
-
-    <color name="c_title_bar_bg">@color/c_white</color>
-
-    <color name="c_dialog_cancel_text">#333333</color>
-    <color name="c_dialog_title_text">#333333</color>
-    <color name="c_dialog_commit_text">#00CC68</color>
-    <color name="c_dialog_content_text">#333333</color>
-    <color name="c_dialog_line">#f2f3f6</color>
-
-
 </resources>

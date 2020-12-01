@@ -1,6 +1,7 @@
 package com.mobileframe.tools;
 
 import android.Manifest;
+import android.app.Activity;
 import android.app.Application;
 import android.content.Context;
 import android.content.Intent;
@@ -12,6 +13,7 @@ import androidx.core.content.ContextCompat;
 import androidx.core.content.FileProvider;
 
 import android.provider.Settings;
+import android.view.View;
 import android.webkit.MimeTypeMap;
 import android.widget.Toast;
 
@@ -22,6 +24,8 @@ import java.io.File;
 /**
  * Created by Administrator on 2016/9/6.
  * 启动系统app
+ *
+ * @see #openFileSelector(Context, String, int)  系统单文件选择器 选择文件
  */
 public class SystemUtils {
 
@@ -80,7 +84,7 @@ public class SystemUtils {
         }
     }
 
-    public String getMIMEType(File var0) {
+    public static String getMIMEType(File var0) {
         String var1 = "";
         String var2 = var0.getName();
         String var3 = var2.substring(var2.lastIndexOf(".") + 1, var2.length()).toLowerCase();
@@ -89,7 +93,7 @@ public class SystemUtils {
     }
 
     /**
-     * 拨打电话
+     * 拨号界面
      *
      * @param context
      * @param phoneNum 电话号码
@@ -98,19 +102,21 @@ public class SystemUtils {
         Intent intent = new Intent(Intent.ACTION_DIAL);
         Uri data = Uri.parse("tel:" + phoneNum);
         intent.setData(data);
-        if (ContextCompat.checkSelfPermission(context, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
-            ToastUtils.showToast(context,"请开启拨号权限");
-            return;
-        }
         context.startActivity(intent);
     }
 
-    public static void startCall(Context context, String phoneNum) {
+    /**
+     * 拨号中
+     *
+     * @param context
+     * @param phoneNum
+     */
+    public static void startCalling(Context context, String phoneNum) {
         Intent intent = new Intent(Intent.ACTION_CALL);
         Uri data = Uri.parse("tel:" + phoneNum);
         intent.setData(data);
         if (ContextCompat.checkSelfPermission(context, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
-            ToastUtils.showToast(context,"请开启拨号权限");
+            ToastUtils.showToast(context, "请开启拨号权限");
             return;
         }
         context.startActivity(intent);
@@ -151,4 +157,23 @@ public class SystemUtils {
         context.startActivity(intent);
     }
 
+    /**
+     * 打开系统文件管理器
+     * android10 及以上必须使用系统管理器访问共享文件
+     *
+     * @param context
+     * @param mineType    过滤文件类型
+     * @param requestCode
+     */
+    public static void openFileSelector(Context context, String mineType, int requestCode) {
+        //通过系统的文件浏览器选择一个文件
+        Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
+        //筛选，只显示可以“打开”的结果，如文件(而不是联系人或时区列表)
+        intent.addCategory(Intent.CATEGORY_OPENABLE);
+        //过滤只显示图像类型文件
+        intent.setType(mineType);
+        if (context instanceof Activity) {
+            ((Activity) context).startActivityForResult(intent, requestCode);
+        }
+    }
 }

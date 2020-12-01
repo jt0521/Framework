@@ -8,12 +8,7 @@ import android.content.pm.ActivityInfo;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
-
-import androidx.annotation.ColorRes;
-import androidx.annotation.LayoutRes;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.ContextCompat;
-
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewStub;
@@ -23,11 +18,18 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 
+import androidx.annotation.ColorRes;
+import androidx.annotation.LayoutRes;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
+import androidx.viewbinding.ViewBinding;
+
 import com.gyf.immersionbar.ImmersionBar;
 import com.mobileframe.R;
 import com.mobileframe.broadcast.NetBean;
 import com.mobileframe.common.ActivityStackManager;
 import com.mobileframe.common.BaseApplication;
+import com.mobileframe.databinding.ActivityBaseBinding;
 import com.mobileframe.widegt.LoadingProgressDialog;
 import com.mobileframe.widegt.TitleBarView;
 import com.toast.ToastUtils;
@@ -36,10 +38,10 @@ import org.greenrobot.eventbus.EventBus;
 
 import java.lang.ref.Reference;
 import java.lang.ref.WeakReference;
-import java.util.List;
-
-import butterknife.ButterKnife;
-import butterknife.Unbinder;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+import java.lang.reflect.ParameterizedType;
+import java.lang.reflect.Type;
 
 /**
  * author: tgl
@@ -55,7 +57,7 @@ import butterknife.Unbinder;
  * 是否使用沉浸式状态栏，默认使用{@link #isImmersionBarEnabled()}
  * 设置状态栏背景{@link #getStatusBarColorResId()}
  */
-public abstract class BaseActivity extends AppCompatActivity {
+public abstract class BaseActivity<T extends ViewBinding> extends AppCompatActivity {
 
     protected BaseActivity mContext;
     protected TitleBarView mBarView;
@@ -63,10 +65,8 @@ public abstract class BaseActivity extends AppCompatActivity {
     protected LinearLayout mBaseLayoutLl;//基础容器
     protected FrameLayout mContentFl;//内容容器
     protected LoadingProgressDialog mProgressDialog;
-    private Unbinder mUnBinder;
     //数据加载失败时展示的view
     private View mFailedLoadView;
-    private List<String> mRequestTag;
     private BroadcastReceiver mNetReceiver;
     /**
      * 是否已注册监听
@@ -74,6 +74,8 @@ public abstract class BaseActivity extends AppCompatActivity {
     private boolean mNetChangeReceiverFlag = false;
     private boolean mNetNotConnect;
     private boolean mIsShowNotNet;
+    public T mViewBinding;
+    ActivityBaseBinding mBaseBinding;
 
     /**
      * 是否设置为全屏,默认不设置
@@ -142,12 +144,14 @@ public abstract class BaseActivity extends AppCompatActivity {
     }
 
     /**
-     * 内容布局id
+     * 由抽象方法改为非抽象，保留是为了兼容v10.1.9及之前的版本
      *
      * @return
      */
-    protected abstract @LayoutRes
-    int getLayoutId();
+    protected @LayoutRes
+    int getLayoutId() {
+        return 0;
+    }
 
     /**
      * 初始化布局控件,在setContentView方法中调用,因此不需要手动调用initView()方法
@@ -167,24 +171,49 @@ public abstract class BaseActivity extends AppCompatActivity {
         }
         setScreenOrientation();
         setContentViewPre();
-        setContentView(getBaseLayoutId());
-        mBaseLayoutLl = (LinearLayout) findViewById(R.id.baseLayoutLl);
-        mContentFl = (FrameLayout) findViewById(R.id.contentFl);
-        View childView = inflateLayout(getLayoutId(), mContentFl);
+
+        mBaseBinding = ActivityBaseBinding.inflate(getLayoutInflater());
+        setContentView(mBaseBinding.getRoot());
+
+        mBaseLayoutLl = mBaseBinding.baseLayoutLl;
+        mContentFl = mBaseBinding.contentFl;
+
+        loadChildBinding();
         if (!supportFullScreen()) {
             setStatusBarStyle();
-            ViewStub viewStub = (ViewStub) findViewById(R.id.viewStub);
+            ViewStub viewStub = mBaseBinding.viewStub;
             if (showTitleBarView() && viewStub != null) {
                 mBarView = new TitleBarView(this, viewStub.inflate());
             }
-        }
-        if (childView != null) {
-            mUnBinder = ButterKnife.bind(this);
         }
         if (needRegisterEventBus()) {
             EventBus.getDefault().register(this);
         }
         initView();
+    }
+
+    /**
+     * 载入子布局
+     */
+    private void loadChildBinding() {
+        Type type = getClass().getGenericSuperclass();
+        if (type instanceof ParameterizedType) {
+            Class<T> viewBindClass = (Class<T>) ((ParameterizedType) type).getActualTypeArguments()[0];
+            if (viewBindClass == null) {
+                return;
+            }
+            try {
+                Method method = viewBindClass.getDeclaredMethod("inflate", LayoutInflater.class);
+                mViewBinding = (T) method.invoke(null, getLayoutInflater());
+                mContentFl.addView(mViewBinding.getRoot());
+            } catch (NoSuchMethodException e) {
+                e.printStackTrace();
+            } catch (IllegalAccessException e) {
+                e.printStackTrace();
+            } catch (InvocationTargetException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     /**
@@ -245,9 +274,6 @@ public abstract class BaseActivity extends AppCompatActivity {
         }
         if (needRegisterEventBus() && EventBus.getDefault().isRegistered(this)) {
             EventBus.getDefault().unregister(this);
-        }
-        if (mUnBinder != null) {
-            mUnBinder.unbind();
         }
         // cancelAllRequest();
         // 结束Activity从堆栈中移除

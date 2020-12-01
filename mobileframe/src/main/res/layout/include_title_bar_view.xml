@@ -17,7 +17,7 @@
         android:gravity="center"
         android:paddingLeft="@dimen/margin_left_view"
         android:paddingRight="@dimen/px32"
-        android:textColor="@android:color/white"
+        android:textColor="@color/c_title_bar_left_tc"
         android:textSize="@dimen/font_36px" />
 
     <TextView
@@ -30,7 +30,7 @@
         android:drawablePadding="@dimen/px16"
         android:gravity="center"
         android:paddingRight="@dimen/px20"
-        android:textColor="@android:color/white"
+        android:textColor="@color/c_title_bar_right_tc"
         android:textSize="@dimen/font_36px" />
 
     <com.mobileframe.widegt.ScrollTextView
@@ -43,7 +43,7 @@
         android:gravity="center"
         android:marqueeRepeatLimit="marquee_forever"
         android:singleLine="true"
-        android:textColor="@android:color/white"
+        android:textColor="@color/c_title_bar_head_tc"
         android:textSize="@dimen/font_title_page"
         tools:text="标题" />
 

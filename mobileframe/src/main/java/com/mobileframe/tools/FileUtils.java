@@ -1,15 +1,23 @@
 package com.mobileframe.tools;
 
 import android.annotation.TargetApi;
+import android.app.Activity;
 import android.app.DownloadManager;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.drawable.Icon;
+import android.media.MediaDataSource;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Environment;
 import android.os.storage.StorageManager;
+import android.provider.DocumentsContract;
 import android.text.TextUtils;
 import android.text.format.Formatter;
+import android.widget.Toast;
+
+import androidx.annotation.RequiresApi;
+import androidx.documentfile.provider.DocumentFile;
 
 import com.mobileframe.tools.service.DownloadService;
 
@@ -27,10 +35,15 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.nio.channels.FileChannel;
+import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.zip.GZIPInputStream;
 import java.util.zip.GZIPOutputStream;
+
+import okhttp3.MediaType;
 
 /**
  * The type File utils.
@@ -156,15 +169,6 @@ public class FileUtils {
 
 
     /**
-     * 是否挂在SDCard
-     *
-     * @return the boolean
-     */
-    public static boolean isSDCardAvailable() {
-        return Environment.MEDIA_MOUNTED.equals(Environment.getExternalStorageState());
-    }
-
-    /**
      * 获取应用在SDCard上的工作路径
      *
      * @param context the context
@@ -217,15 +221,6 @@ public class FileUtils {
         }
     }
 
-    /**
-     * 删除文件
-     *
-     * @param filename the filename
-     * @return the boolean
-     */
-    public static boolean deleteFile(String filename) {
-        return new File(filename).delete();
-    }
 
     /**
      * 删除目录下的所有文件
@@ -569,7 +564,7 @@ public class FileUtils {
         File folder = new File(folderName);
         if (folder.exists()) {
             if (recreate) {
-                deleteFile(folderName);
+                deleteFile(null, folderName);
                 return folder.mkdirs();
             } else {
                 return true;
@@ -681,7 +676,7 @@ public class FileUtils {
             if (f.isFile()) {
                 f.delete();
             } else if (f.isDirectory()) {
-                deleteFile(f.getAbsolutePath());
+                deleteFile(null, f.getAbsolutePath());
             }
         }
         return file.delete();
@@ -745,15 +740,147 @@ public class FileUtils {
     }
 
     /**
-     * 通过APKURL升级应用
+     * 选择一个文件
+     * android 10 及以上必须使用
      *
-     * @param context the context
-     * @param fileUrl the fileurl
+     * @param context
+     * @param type        文件类型
+     * @param requestCode
      */
-    public static void upgradeApp(Context context, String fileUrl) {
-        Intent intent = new Intent(context, DownloadService.class);
-        intent.putExtra("fileUrl", fileUrl);
-        context.startService(intent);
+    public static void selectSingleFile(Context context, String type, int requestCode) {
+        //通过系统的文件浏览器选择一个文件
+        Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
+        //筛选，只显示可以“打开”的结果，如文件(而不是联系人或时区列表)
+        intent.addCategory(Intent.CATEGORY_OPENABLE);
+        //过滤只显示图像类型文件
+        intent.setType(type);
+        if (context instanceof Activity) {
+            ((Activity) context).startActivityForResult(intent, requestCode);
+        }
     }
 
+    /**
+     * 创建一个文件
+     * android 10 及以上必须使用
+     *
+     * @param context
+     * @param type        文件类型
+     * @param fileName    文件名称+后缀
+     * @param requestCode
+     */
+    public static void createFile(Context context, String type, String fileName, int requestCode) {
+        Intent intent = new Intent(Intent.ACTION_CREATE_DOCUMENT);
+        intent.addCategory(Intent.CATEGORY_OPENABLE);
+        intent.setType(type);
+        intent.putExtra(Intent.EXTRA_TITLE, fileName);
+        if (context instanceof Activity) {
+            ((Activity) context).startActivityForResult(intent, requestCode);
+        }
+    }
+
+    /**
+     * 读取文件字符串
+     * android 10 及以上必须使用
+     *
+     * @param context
+     * @param uri
+     */
+    public static String readFileString(Context context, Uri uri) {
+        if (uri == null) {
+            return null;
+        }
+        StringBuilder stringBuilder = new StringBuilder();
+        InputStream inputStream = null;
+        try {
+            inputStream = context.getContentResolver().openInputStream(uri);
+            BufferedReader reader = new BufferedReader(new InputStreamReader(Objects.requireNonNull(inputStream)));
+            String line;
+            while ((line = reader.readLine()) != null) {
+                stringBuilder.append(line);
+            }
+        } catch (IOException e) {
+        } finally {
+            if (inputStream != null) {
+                try {
+                    inputStream.close();
+                } catch (IOException e) {
+                    e.fillInStackTrace();
+                }
+            }
+        }
+        return stringBuilder.toString();
+    }
+
+    /**
+     * 修改文件
+     * android 10 及以上必须使用
+     *
+     * @param context
+     * @param targetUri
+     * @param content
+     * @return
+     */
+    public static boolean modifyFile(Context context, Uri targetUri, String content) {
+        if (targetUri == null) {
+            return false;
+        }
+        OutputStream outputStream = null;
+        try {
+            // 获取 OutputStream
+            outputStream = context.getContentResolver().openOutputStream(targetUri);
+            if (Build.VERSION.SDK_INT > Build.VERSION_CODES.JELLY_BEAN_MR2) {
+                outputStream.write(content.getBytes(StandardCharsets.UTF_8));
+            } else {
+                outputStream.write(content.getBytes(Charset.forName("UTF_8")));
+            }
+        } catch (IOException e) {
+            return false;
+        } finally {
+            if (outputStream != null) {
+                try {
+                    outputStream.close();
+                } catch (IOException e) {
+                    e.fillInStackTrace();
+                }
+            }
+        }
+        return true;
+    }
+
+    /**
+     * 删除文件
+     * android 10 及以上必须使用
+     *
+     * @param filename the filename
+     * @return the boolean
+     */
+    public static boolean deleteFile(Context context, String filename) {
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.P) {
+            return new File(filename).delete();
+        }
+        return deleteFile(context, Uri.fromFile(new File(filename)));
+    }
+
+    /**
+     * 删除文件夹
+     * android 10 及以上必须使用
+     *
+     * @param context
+     * @param targetUri
+     * @return
+     */
+    public static boolean deleteFile(Context context, Uri targetUri) {
+        if (targetUri == null || context == null) {
+            return false;
+        }
+        try {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+                DocumentsContract.deleteDocument(context.getContentResolver(), targetUri);
+            }
+            targetUri = null;
+        } catch (FileNotFoundException e) {
+            return false;
+        }
+        return true;
+    }
 }

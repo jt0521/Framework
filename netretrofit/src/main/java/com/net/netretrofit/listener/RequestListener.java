@@ -1,8 +1,5 @@
 package com.net.netretrofit.listener;
 
-
-import com.net.netretrofit.callback.ResultBean;
-
 /**
  * @author tgl
  * 网络响应处理回调基类
