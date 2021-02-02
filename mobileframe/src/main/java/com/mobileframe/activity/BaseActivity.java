@@ -288,10 +288,10 @@ public abstract class BaseActivity<T extends ViewBinding> extends AppCompatActiv
      */
     @Override
     protected void onRestoreInstanceState(Bundle savedInstanceState) {
-//        if (savedInstanceState != null) {
-//            String FRAGMENTS_TAG = "androidx.fragment.app:fragments";
-//            savedInstanceState.remove(FRAGMENTS_TAG);
-//        }
+        // if (savedInstanceState != null) {
+        //   String FRAGMENTS_TAG = "androidx.fragment.app:fragments";
+        // savedInstanceState.remove(FRAGMENTS_TAG);
+        // }
         super.onRestoreInstanceState(savedInstanceState);
     }
 
