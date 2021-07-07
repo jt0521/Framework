@@ -1,15 +1,14 @@
 package com.mobileframe.widegt;
 
 import android.app.Activity;
-
-import androidx.annotation.ColorRes;
-import androidx.annotation.DrawableRes;
-import androidx.core.content.ContextCompat;
-
 import android.text.Spanned;
 import android.view.View;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+
+import androidx.annotation.ColorRes;
+import androidx.annotation.DrawableRes;
+import androidx.core.content.ContextCompat;
 
 import com.mobileframe.R;
 
@@ -19,10 +18,10 @@ import com.mobileframe.R;
  */
 public class TitleBarView {
 
-    private RelativeLayout mBarViewRl;
+    private final RelativeLayout mBarViewRl;
     private TextView mLeftTv;
     private TextView mSubjectTv;
-    private Activity mContext;
+    private final Activity mContext;
     private TextView mRightTv;
 
     public TitleBarView(Activity context, View barView) {
@@ -160,6 +159,7 @@ public class TitleBarView {
      */
     public void setRightTv(String rightText, @DrawableRes int imgId, View.OnClickListener listener) {
         mRightTv.setText(rightText);
+        mRightTv.setVisibility(View.VISIBLE);
         if (imgId == -1) {
             mRightTv.setCompoundDrawablesWithIntrinsicBounds(0, 0, 0, 0);
         } else {

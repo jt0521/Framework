@@ -26,7 +26,7 @@
     <!--    title bar 标题文字色-->
     <color name="c_title_bar_head_tc">@color/c_black</color>
     <!--    title bar 右侧文字色-->
-    <color name="c_title_bar_right_tc">@color/c_gray</color>
+    <color name="c_title_bar_right_tc">@color/c_black</color>
 
     <color name="c_dialog_cancel_text">#333333</color>
     <color name="c_dialog_title_text">#333333</color>
@@ -34,5 +34,14 @@
     <color name="c_dialog_content_text">#333333</color>
     <color name="c_dialog_line">#f2f3f6</color>
 
+
+    <!--    统一字体-->
+    <dimen name="font_title_page">@dimen/font_38px</dimen>
+    <dimen name="font_title_dialog">@dimen/font_36px</dimen>
+    <dimen name="font_title_left">@dimen/font_28px</dimen>
+    <dimen name="font_title_right">@dimen/font_25px</dimen>
+    <dimen name="font_text_right_corner">@dimen/font_30px</dimen>
+    <dimen name="font_text_dialog_content">@dimen/font_28px</dimen>
+    <dimen name="font_btn_dialog">@dimen/font_28px</dimen>
 
 </resources>

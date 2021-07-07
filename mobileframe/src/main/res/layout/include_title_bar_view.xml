@@ -18,7 +18,7 @@
         android:paddingLeft="@dimen/margin_left_view"
         android:paddingRight="@dimen/px32"
         android:textColor="@color/c_title_bar_left_tc"
-        android:textSize="@dimen/font_36px" />
+        android:textSize="@dimen/font_title_left" />
 
     <TextView
         android:id="@+id/rightTv_actionABar"
@@ -31,7 +31,7 @@
         android:gravity="center"
         android:paddingRight="@dimen/px20"
         android:textColor="@color/c_title_bar_right_tc"
-        android:textSize="@dimen/font_36px" />
+        android:textSize="@dimen/font_title_right" />
 
     <com.mobileframe.widegt.ScrollTextView
         android:id="@+id/subjectTv_actionBar"

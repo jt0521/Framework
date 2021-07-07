@@ -38,7 +38,6 @@ import org.greenrobot.eventbus.EventBus;
 
 import java.lang.ref.Reference;
 import java.lang.ref.WeakReference;
-import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
@@ -200,20 +199,23 @@ public abstract class BaseActivity<T extends ViewBinding> extends AppCompatActiv
         if (type instanceof ParameterizedType) {
             Class<T> viewBindClass = (Class<T>) ((ParameterizedType) type).getActualTypeArguments()[0];
             if (viewBindClass == null) {
+                loadChildLayout();
                 return;
             }
             try {
                 Method method = viewBindClass.getDeclaredMethod("inflate", LayoutInflater.class);
                 mViewBinding = (T) method.invoke(null, getLayoutInflater());
                 mContentFl.addView(mViewBinding.getRoot());
-            } catch (NoSuchMethodException e) {
-                e.printStackTrace();
-            } catch (IllegalAccessException e) {
-                e.printStackTrace();
-            } catch (InvocationTargetException e) {
-                e.printStackTrace();
+            } catch (Exception e) {
+                loadChildLayout();
             }
+        } else {
+            loadChildLayout();
         }
+    }
+
+    protected void loadChildLayout() {
+        inflateLayout(getLayoutId(), mContentFl);
     }
 
     /**

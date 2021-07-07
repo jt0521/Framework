@@ -518,13 +518,6 @@
     <dimen name="indicator_corner_radius">12dp</dimen>
     <dimen name="indicator_internal_padding">4dp</dimen>
 
-    <!--    统一字体-->
-    <dimen name="font_title_page">@dimen/font_40px</dimen>
-    <dimen name="font_title_dialog">@dimen/font_36px</dimen>
-    <dimen name="font_text_right_corner">@dimen/font_30px</dimen>
-    <dimen name="font_text_dialog_content">@dimen/font_28px</dimen>
-    <dimen name="font_btn_dialog">@dimen/font_28px</dimen>
-
     <!--    bar margin-->
     <dimen name="margin_left_view">@dimen/px32</dimen>
 </resources>

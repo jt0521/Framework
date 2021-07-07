@@ -15,6 +15,12 @@
         android:layout_height="@dimen/bar_height"
         android:layout="@layout/include_title_bar_view" />
 
+    <View
+        android:id="@+id/line_bar"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/px2"
+        android:visibility="gone" />
+
     <FrameLayout
         android:id="@+id/contentFl"
         android:layout_width="match_parent"

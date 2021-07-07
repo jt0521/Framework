@@ -10,16 +10,17 @@ package com.mobileframe.activity;
  * 修改日期
  */
 
-import androidx.annotation.ColorInt;
-import androidx.core.content.ContextCompat;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTabHost;
-
+import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TabHost;
 import android.widget.TextView;
+
+import androidx.annotation.ColorInt;
+import androidx.core.content.ContextCompat;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTabHost;
 
 import com.mobileframe.R;
 import com.mobileframe.tools.ResourceUtils;
@@ -33,6 +34,10 @@ public abstract class BaseTabActivity extends BaseActivity implements TabHost.On
 
     protected abstract Class<? extends Fragment>[] tabFragmentArray();
 
+    protected Bundle[] tabFragmentBundleArray() {
+        return null;
+    }
+
     protected abstract int[] tabItemImgSelectId();
 
     protected abstract int[] tabItemImgUnSelectId();
@@ -45,14 +50,16 @@ public abstract class BaseTabActivity extends BaseActivity implements TabHost.On
      *
      * @return
      */
-    protected abstract @ColorInt int textColorId();
+    protected abstract @ColorInt
+    int textColorId();
 
     /**
      * 选中字体颜色
      *
      * @return
      */
-    protected abstract @ColorInt int textColorIdSelected();
+    protected abstract @ColorInt
+    int textColorIdSelected();
 
     @Override
     protected int getLayoutId() {
@@ -61,7 +68,9 @@ public abstract class BaseTabActivity extends BaseActivity implements TabHost.On
 
     @Override
     protected View inflateLayout(int layoutId, ViewGroup parent) {
-        return getLayoutInflater().inflate(layoutId, mBaseLayoutLl);
+        View view = getLayoutInflater().inflate(layoutId, null);
+        mBaseLayoutLl.addView(view);
+        return view;
     }
 
     @Override
@@ -87,7 +96,7 @@ public abstract class BaseTabActivity extends BaseActivity implements TabHost.On
         for (int i = 0; i < length; i++) {
             TabHost.TabSpec tabSpec = mFragmentTabHost.newTabSpec(String.valueOf(i)).setIndicator(getTabItemView(i));
             //将Tab按钮添加进Tab选项卡中
-            mFragmentTabHost.addTab(tabSpec, tabFragmentArray()[i], null);
+            mFragmentTabHost.addTab(tabSpec, tabFragmentArray()[i], tabFragmentBundleArray() == null ? null : tabFragmentBundleArray()[i]);
             //设置item背景颜色
             mFragmentTabHost.getTabWidget().getChildAt(i).setBackgroundColor(
                     ContextCompat.getColor(this, R.color.colorTransparent));
