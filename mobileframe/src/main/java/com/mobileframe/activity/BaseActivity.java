@@ -75,6 +75,7 @@ public abstract class BaseActivity<T extends ViewBinding> extends AppCompatActiv
     private boolean mIsShowNotNet;
     public T mViewBinding;
     ActivityBaseBinding mBaseBinding;
+    protected View mLineBar;
 
     /**
      * 是否设置为全屏,默认不设置
@@ -185,6 +186,7 @@ public abstract class BaseActivity<T extends ViewBinding> extends AppCompatActiv
                 mBarView = new TitleBarView(this, viewStub.inflate());
             }
         }
+        mLineBar = mBaseBinding.lineBar;
         if (needRegisterEventBus()) {
             EventBus.getDefault().register(this);
         }
