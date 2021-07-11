@@ -128,6 +128,7 @@ public abstract class BaseTabActivity extends BaseActivity implements TabHost.On
         }
         textView.setTextColor(textColorId());
         mTextViews[index] = textView;
+        customTabView(index, itemView);
         return itemView;
     }
 
@@ -140,6 +141,7 @@ public abstract class BaseTabActivity extends BaseActivity implements TabHost.On
                     mTextViews[mLastTabIndex].setTextColor(textColorId());
                 }
                 mTextViews[curIndex].setTextColor(textColorIdSelected());
+                onTabSelected(mLastTabIndex, curIndex);
             }
             mLastTabIndex = curIndex;
         }
@@ -147,6 +149,24 @@ public abstract class BaseTabActivity extends BaseActivity implements TabHost.On
     }
 
     protected abstract void onTabChange(int tabIndex);
+
+    /**
+     * 自定义创建 tab view
+     *
+     * @param itemView
+     */
+    protected void customTabView(int index, View itemView) {
+
+    }
+
+    /**
+     * tab切换回调
+     *
+     * @param lastTabIndex 可能为-1,默认进入时为负一
+     * @param curIndex
+     */
+    protected void onTabSelected(int lastTabIndex, int curIndex) {
+    }
 
     @Override
     protected void onDestroy() {

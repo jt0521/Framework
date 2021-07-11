@@ -11,7 +11,9 @@ import androidx.multidex.MultiDex;
 
 import com.mobileframe.activity.BaseActivity;
 import com.mobileframe.fragments.BaseFragment;
+import com.mobileframe.platform.StethoUtils;
 import com.mobileframe.tools.AppUtils;
+import com.mobileframe.tools.CrashExceptionHandler;
 import com.mobileframe.tools.PkgUtil;
 import com.net.netretrofit.HttpConfigure;
 import com.net.netretrofit.listener.UiHandler;
@@ -40,12 +42,12 @@ public abstract class BaseApplication extends Application implements UiHandler {
         if (Config.isDebugEniv) {
             // 反射方式注册有缺陷
             // ThirdSdkManagement.initLeakCanary(this);
-            //mRefWatcher = initLeakCanary(this);
-            //StethoUtils.init(this);
-            //StethoUtils.configureInterceptor(new OkHttpClient.Builder().build());
-            //CrashExceptionHandler.getInstance().init(this);
+            mRefWatcher = initLeakCanary(this);
+            StethoUtils.init(this);
+            StethoUtils.configureInterceptor(new OkHttpClient.Builder().build());
+            CrashExceptionHandler.getInstance().init(this);
         }
-        //initHttp();
+        initHttp();
         init();
     }
 

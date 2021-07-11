@@ -83,4 +83,9 @@ public class SharedPreferencesHelper {
         return mSp.getAll();
     }
 
+    public void clear() {
+        editor = mSp.edit();
+        editor.clear();
+        editor.commit();
+    }
 }
