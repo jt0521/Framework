@@ -39,6 +39,15 @@ public abstract class BaseApplication extends Application implements UiHandler {
         if (!AppUtils.isApplicationProcess(this)) {
             return;
         }
+        initDebugger();
+        initHttp();
+        init();
+    }
+
+    /**
+     * 设置调试框架
+     */
+    public void initDebugger() {
         if (Config.isDebugEniv) {
             // 反射方式注册有缺陷
             // ThirdSdkManagement.initLeakCanary(this);
@@ -47,8 +56,6 @@ public abstract class BaseApplication extends Application implements UiHandler {
             StethoUtils.configureInterceptor(new OkHttpClient.Builder().build());
             CrashExceptionHandler.getInstance().init(this);
         }
-        initHttp();
-        init();
     }
 
     /**

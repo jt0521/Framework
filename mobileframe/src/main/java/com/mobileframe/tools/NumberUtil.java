@@ -128,7 +128,7 @@ public class NumberUtil {
             hideReplace += "*";
         }
         return str.substring(0, start) + hideReplace
-                + str.substring(end, str.length());
+                + str.substring(end);
     }
 
     /**
@@ -152,10 +152,7 @@ public class NumberUtil {
      * @return
      */
     public static boolean isIntegerOrFloatNumber(String number) {
-        if (isIntegerNumber(number) || isFloatPointNumber(number))
-            return true;
-        else
-            return false;
+        return isIntegerNumber(number) || isFloatPointNumber(number);
     }
 
     /**
@@ -170,10 +167,7 @@ public class NumberUtil {
         }
         number = number.trim();
         String intNumRegex = "\\-{0,1}\\d+";//整数的正则表达式
-        if (number.matches(intNumRegex))
-            return true;
-        else
-            return false;
+        return number.matches(intNumRegex);
     }
 
     /**
@@ -186,10 +180,7 @@ public class NumberUtil {
         number = number.trim();
         String pointPrefix = "(\\-|\\+){0,1}\\d*\\.\\d+";//浮点数的正则表达式-小数点在中间与前面
         String pointSuffix = "(\\-|\\+){0,1}\\d+\\.";//浮点数的正则表达式-小数点在后面
-        if (number.matches(pointPrefix) || number.matches(pointSuffix))
-            return true;
-        else
-            return false;
+        return number.matches(pointPrefix) || number.matches(pointSuffix);
     }
 
     /**
@@ -221,10 +212,7 @@ public class NumberUtil {
      * @Function:（判断奇、偶数）
      */
     public static boolean isOdd(int number) {
-        if ((number & 1) != 0) {
-            return false;
-        }
-        return true;
+        return (number & 1) == 0;
     }
 
     /**
@@ -236,10 +224,7 @@ public class NumberUtil {
     public static synchronized Boolean isDouble(String str) {
         if (issNull(str)) {
             return false;
-        } else if (str.contains(".") || isNumeric(str)) {
-            return true;
-        }
-        return false;
+        } else return str.contains(".") || isNumeric(str);
     }
 
     /**
@@ -254,9 +239,7 @@ public class NumberUtil {
         }
         if (obj instanceof String) {
             String objValue = (String) obj;
-            if (objValue.trim().equals("")) {
-                return true;
-            }
+            return objValue.trim().equals("");
         }
         return false;
     }
@@ -354,6 +337,18 @@ public class NumberUtil {
                 return Integer.parseInt(numStr);
             } catch (Exception e) {
                 return 0;
+            }
+        }
+    }
+
+    public static Double str2Double(String numStr) {
+        if (TextUtils.isEmpty(numStr)) {
+            return 0.0;
+        } else {
+            try {
+                return Double.parseDouble(numStr);
+            } catch (Exception e) {
+                return 0.0;
             }
         }
     }
