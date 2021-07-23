@@ -32,7 +32,7 @@ public class NoNetworkActivity extends BaseActivity {
 
     @Override
     protected boolean needRegisterNetChange() {
-        return false;
+        return true;
     }
 
     /**
