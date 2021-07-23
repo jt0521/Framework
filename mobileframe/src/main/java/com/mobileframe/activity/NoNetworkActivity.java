@@ -1,7 +1,5 @@
 package com.mobileframe.activity;
 
-import android.app.Activity;
-import android.util.Log;
 import android.view.View;
 
 import androidx.core.content.ContextCompat;
@@ -34,7 +32,7 @@ public class NoNetworkActivity extends BaseActivity {
 
     @Override
     protected boolean needRegisterNetChange() {
-        return true;
+        return false;
     }
 
     /**
