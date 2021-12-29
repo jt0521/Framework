@@ -1,4 +1,4 @@
-package com.mobileframe.interfaces;
+package com.x.listener;
 
 import android.view.View;
 
@@ -9,7 +9,7 @@ import android.view.View;
  * update: 2017/7/27
  */
 
-public interface OnRecyclerViewItemLongClickListener {
+public interface OnRvItemLongClickListener {
 
     void onItemLongClick(View v, int position);
 }

@@ -1,8 +1,7 @@
 plugins {
     id 'com.android.library'
+    id 'com.github.dcendents.android-maven'
 }
-
-apply plugin: 'com.github.dcendents.android-maven'
 group = 'com.gitee.tgl'
 
 android {
@@ -34,5 +33,12 @@ android {
 dependencies {
 
     implementation 'androidx.appcompat:appcompat:1.2.0'
-    implementation 'androidx.recyclerview:recyclerview:1.0.0'
+    implementation 'com.google.android.material:material:1.2.1'
+    implementation project(path: ':mobileframe')
+    testImplementation 'junit:junit:4.+'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.2'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
+
+    implementation "com.jakewharton:butterknife:${rootProject.butterKnifeVersion}"
+    annotationProcessor "com.jakewharton:butterknife-compiler:${rootProject.butterKnifeVersion}"
 }

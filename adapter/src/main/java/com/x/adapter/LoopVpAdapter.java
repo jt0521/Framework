@@ -1,4 +1,4 @@
-package com.mobileframe.adapter;
+package com.x.adapter;
 
 import android.annotation.SuppressLint;
 import android.content.Context;

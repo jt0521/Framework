@@ -1,15 +1,16 @@
-package com.mobileframe.adapter;
+package com.x.adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.AdapterView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.mobileframe.interfaces.OnRecyclerViewItemClickListener;
-import com.mobileframe.interfaces.OnRecyclerViewItemLongClickListener;
-import com.mobileframe.widegt.holderview.BaseRecyclerHolder;
+import com.x.holderview.BaseRecyclerHolder;
+import com.x.listener.OnRvItemClickListener;
+import com.x.listener.OnRvItemLongClickListener;
 
 import java.util.List;
 
@@ -20,8 +21,8 @@ public abstract class BaseRecyclerAdapter<VH extends BaseRecyclerHolder, T> exte
 
     public Context mContext;
     private List<T> mListData;
-    private OnRecyclerViewItemClickListener mOnItemClickListener;
-    private OnRecyclerViewItemLongClickListener mOnItemLongClickListener;
+    private OnRvItemClickListener mOnItemClickListener;
+    private OnRvItemLongClickListener mOnItemLongClickListener;
     public LayoutInflater mInflater;
 
     public BaseRecyclerAdapter(Context context) {
@@ -57,11 +58,11 @@ public abstract class BaseRecyclerAdapter<VH extends BaseRecyclerHolder, T> exte
     public abstract void onBindViewData(VH holder, int position);
 
 
-    public void setOnItemClickListener(OnRecyclerViewItemClickListener onItemClickListener) {
+    public void setOnItemClickListener(OnRvItemClickListener onItemClickListener) {
         this.mOnItemClickListener = onItemClickListener;
     }
 
-    public void setOnItemLongClickListener(OnRecyclerViewItemLongClickListener onItemLongClickListener) {
+    public void setOnItemLongClickListener(OnRvItemLongClickListener onItemLongClickListener) {
         this.mOnItemLongClickListener = onItemLongClickListener;
     }
 

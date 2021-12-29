@@ -1,4 +1,4 @@
-package com.mobileframe.interfaces;
+package com.x.listener;
 
 /**
  * description: 单击事件
@@ -8,7 +8,8 @@ package com.mobileframe.interfaces;
  */
 
 import android.view.View;
-public interface OnRecyclerViewItemClickListener {
+
+public interface OnRvItemClickListener {
 
     void onItemClick(View v, int position);
 }

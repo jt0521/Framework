@@ -30,3 +30,9 @@ allprojects {
 task clean(type: Delete) {
     delete rootProject.buildDir
 }
+
+ext {
+    butterKnifeVersion = '10.1.0'
+    compileSdkVersion = 30
+    buildToolsVersion = '30.0.3'
+}

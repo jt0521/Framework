@@ -1,4 +1,4 @@
-package com.mobileframe.widegt.holderview;
+package com.x.holderview;
 
 import android.view.View;
 

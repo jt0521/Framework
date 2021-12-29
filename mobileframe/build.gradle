@@ -1,15 +1,14 @@
 apply plugin: 'com.android.library'
 apply plugin: 'com.github.dcendents.android-maven'
 group = 'com.gitee.tgl'
-def butterKnifeVersion = '10.1.0'
 
 android {
-    compileSdkVersion 28
-    buildToolsVersion '28.0.3'
+    compileSdkVersion rootProject.compileSdkVersion
+    buildToolsVersion rootProject.buildToolsVersion
 
     defaultConfig {
         minSdkVersion 15
-        targetSdkVersion 28
+        targetSdkVersion rootProject.compileSdkVersion
         versionCode 1
         versionName "1.0"
 
@@ -73,8 +72,8 @@ dependencies {
     //沉浸式状态栏
     implementation 'com.gyf.immersionbar:immersionbar:3.0.0'
 
-    implementation 'com.jakewharton:butterknife:' + butterKnifeVersion
-    annotationProcessor 'com.jakewharton:butterknife-compiler:' + butterKnifeVersion
+    implementation "com.jakewharton:butterknife:${rootProject.butterKnifeVersion}"
+    annotationProcessor "com.jakewharton:butterknife-compiler:${rootProject.butterKnifeVersion}"
     implementation 'androidx.recyclerview:recyclerview:1.0.0'
 
     api 'com.nineoldandroids:library:2.4.0'

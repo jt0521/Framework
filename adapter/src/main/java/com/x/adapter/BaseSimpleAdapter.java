@@ -1,12 +1,10 @@
-package com.mobileframe.adapter;
+package com.x.adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-
-import com.mobileframe.widegt.holderview.BaseHolderView;
 
 import java.util.ArrayList;
 import java.util.List;
